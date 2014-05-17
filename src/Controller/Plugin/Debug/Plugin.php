@@ -1,6 +1,6 @@
 <?php
 
-namespace Zrt\Controller\Plugin\Debug;
+namespace ZFDebug\Controller\Plugin\Debug;
 
 class Plugin
 {

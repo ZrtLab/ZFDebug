@@ -1,23 +1,11 @@
 <?php
-/**
- * ZFDebug Zend Additions
- *
- * @category   ZFDebug
- * @package    ZFDebug_Controller
- * @subpackage Plugins
- * @copyright  Copyright (c) 2008-2009 ZF Debug Bar Team (http://code.google.com/p/zfdebug)
- * @license    http://code.google.com/p/zfdebug/wiki/License     New BSD License
- * @version    $Id$
- */
 
-/**
- * @category   ZFDebug
- * @package    ZFDebug_Controller
- * @subpackage Plugins
- * @copyright  Copyright (c) 2008-2009 ZF Debug Bar Team (http://code.google.com/p/zfdebug)
- * @license    http://code.google.com/p/zfdebug/wiki/License     New BSD License
- */
-class Zrt_Controller_Plugin_Debug_Plugin_Variables extends Zrt_Controller_Plugin_Debug_Plugin implements Zrt_Controller_Plugin_Debug_Plugin_Interface
+namespace ZFDebug\Controller\Plugin\Debug\Plugin;
+
+use ZFDebug\Controller\Plugin\Debug\Plugin\InterfacePlugin;
+use ZFDebug\Controller\Plugin\Debug\Plugin;
+
+class Variables extends Plugin implements InterfacePlugin
 {
     /**
      * Contains plugin identifier name
@@ -31,11 +19,6 @@ class Zrt_Controller_Plugin_Debug_Plugin_Variables extends Zrt_Controller_Plugin
      */
     protected $_request;
 
-    /**
-     * Create Zrt_Controller_Plugin_Debug_Plugin_Variables
-     *
-     * @return void
-     */
     public function __construct()
     {
 
@@ -50,7 +33,7 @@ class Zrt_Controller_Plugin_Debug_Plugin_Variables extends Zrt_Controller_Plugin
     {
         return $this->_identifier;
     }
-    
+
     /**
      * Returns the base64 encoded icon
      *
@@ -101,11 +84,11 @@ class Zrt_Controller_Plugin_Debug_Plugin_Variables extends Zrt_Controller_Plugin
         $vars .= '<h4>Zend Registry</h4>';
         $registry->ksort();
         $vars .= '<div id="ZFDebug_registry" style="margin-left:-22px">' . $this->_cleanData($registry) . '</div>';
-        
+
         $cookies = $this->_request->getCookie();
         $vars .= '<h4>Cookies</h4>'
                . '<div id="ZFDebug_cookie" style="margin-left:-22px">' . $this->_cleanData($cookies) . '</div>';
-        
+
         $vars .= '</div><div style="clear:both">&nbsp;</div>';
         return $vars;
     }

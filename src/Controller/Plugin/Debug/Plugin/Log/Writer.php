@@ -1,42 +1,29 @@
 <?php
-/**
- * ZFDebug Zend Additions
- *
- * @category   ZFDebug
- * @package    ZFDebug_Controller
- * @subpackage Plugins
- * @copyright  Copyright (c) 2008-2009 ZF Debug Bar Team (http://code.google.com/p/zfdebug)
- * @license    http://code.google.com/p/zfdebug/wiki/License     New BSD License
- * @version    $Id$
- */
 
-/**
- * @category   ZFDebug
- * @package    ZFDebug_Controller
- * @subpackage Plugins
- * @copyright  Copyright (c) 2008-2009 ZF Debug Bar Team (http://code.google.com/p/zfdebug)
- * @license    http://code.google.com/p/zfdebug/wiki/License     New BSD License
- */
-class Zrt_Controller_Plugin_Debug_Plugin_Log_Writer extends Zend_Log_Writer_Abstract
+namespace ZFDebug\Controller\Plugin\Debug\Plugin\Log;
+
+use ZFDebug\Controller\Plugin\Debug\Plugin\Log as PluginLog;
+
+class Writer extends Zend_Log_Writer_Abstract
 {
     protected $_messages = array();
     protected $_errors = 0;
-    
+
     public static function factory($config)
     {
         return new self();
     }
-    
+
     public function getMessages()
     {
         return $this->_messages;
     }
-    
+
     public function getErrorCount()
     {
         return $this->_errors;
     }
-    
+
     /**
      * Write a message to the log.
      *
@@ -57,13 +44,13 @@ class Zrt_Controller_Plugin_Debug_Plugin_Log_Writer extends Zend_Log_Writer_Abst
         }
         if ($event['priority'] < 6) {
             $event['color'] = '#fd9600';
-        } 
+        }
         if ($event['priority'] < 5) {
             $event['color'] = 'red';
             $this->_errors++;
         }
 
-        if ($event['priority'] == Zrt_Controller_Plugin_Debug_Plugin_Log::ZFLOG) {
+        if ($event['priority'] == PluginLog::ZFLOG) {
             $event['priorityName'] = $event['message']['time'];
             $event['memory'] = $event['message']['memory'];
             $event['message'] = $event['message']['message'];
