@@ -1,23 +1,11 @@
 <?php
-/**
- * ZFDebug Zend Additions
- *
- * @category   ZFDebug
- * @package    ZFDebug_Controller
- * @subpackage Plugins
- * @copyright  Copyright (c) 2008-2009 ZF Debug Bar Team (http://code.google.com/p/zfdebug)
- * @license    http://code.google.com/p/zfdebug/wiki/License     New BSD License
- * @version    $Id$
- */
 
-/**
- * @category   ZFDebug
- * @package    ZFDebug_Controller
- * @subpackage Plugins
- * @copyright  Copyright (c) 2008-2009 ZF Debug Bar Team (http://code.google.com/p/zfdebug)
- * @license    http://code.google.com/p/zfdebug/wiki/License     New BSD License
- */
-class ZFDebug_Controller_Plugin_Debug_Plugin_Variables extends ZFDebug_Controller_Plugin_Debug_Plugin implements ZFDebug_Controller_Plugin_Debug_Plugin_Interface
+namespace ZFDebug\Controller\Plugin\Debug\Plugin;
+
+use ZFDebug\Controller\Plugin\Debug\Plugin\InterfacePlugin;
+use ZFDebug\Controller\Plugin\Debug\Plugin;
+
+class Variables extends Plugin implements InterfacePlugin
 {
     /**
      * Contains plugin identifier name
@@ -31,11 +19,6 @@ class ZFDebug_Controller_Plugin_Debug_Plugin_Variables extends ZFDebug_Controlle
      */
     protected $_request;
 
-    /**
-     * Create ZFDebug_Controller_Plugin_Debug_Plugin_Variables
-     *
-     * @return void
-     */
     public function __construct()
     {
 
@@ -96,11 +79,6 @@ class ZFDebug_Controller_Plugin_Debug_Plugin_Variables extends ZFDebug_Controlle
             $vars .= '<h4>Post variables</h4>'
                    . '<div id="ZFDebug_post" style="margin-left:-22px">' . $this->_cleanData($this->_request->getPost()) . '</div>';
         }
-        
-        $vars .= '<h4>Constants</h4>';
-        $constants = get_defined_constants(true);
-        ksort($constants['user']);
-        $vars .= '<div id="ZFDebug_constants" style="margin-left:-22px">' . $this->_cleanData($constants['user']) . '</div>';
 
         $registry = Zend_Registry::getInstance();
         $vars .= '<h4>Zend Registry</h4>';

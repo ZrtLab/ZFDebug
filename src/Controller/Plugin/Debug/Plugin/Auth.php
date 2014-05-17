@@ -1,23 +1,10 @@
 <?php
-/**
- * ZFDebug Zend Additions
- *
- * @category   ZFDebug
- * @package    ZFDebug_Controller
- * @subpackage Plugins
- * @copyright  Copyright (c) 2008-2009 ZF Debug Bar Team (http://code.google.com/p/zfdebug)
- * @license    http://code.google.com/p/zfdebug/wiki/License     New BSD License
- * @version    $Id: $
- */
 
-/**
- * @category   ZFDebug
- * @package    ZFDebug_Controller
- * @subpackage Plugins
- * @copyright  Copyright (c) 2008-2009 ZF Debug Bar Team (http://code.google.com/p/zfdebug)
- * @license    http://code.google.com/p/zfdebug/wiki/License     New BSD License
- */
-class ZFDebug_Controller_Plugin_Debug_Plugin_Auth implements ZFDebug_Controller_Plugin_Debug_Plugin_Interface
+namespace ZFDebug\Controller\Plugin\Debug\Plugin;
+
+use ZFDebug\Controller\Plugin\Debug\Plugin\InterfacePlugin;
+
+class Auth implements InterfacePlugin
 {
     /**
      * Contains plugin identifier name
@@ -55,7 +42,7 @@ class ZFDebug_Controller_Plugin_Debug_Plugin_Auth implements ZFDebug_Controller_
     protected $_acl;
 
     /**
-     * Create ZFDebug_Controller_Plugin_Debug_Plugin_Auth
+     * Create Zrt_Controller_Plugin_Debug_Plugin_Auth
      *
      * @var string $user
      * @var string $role

@@ -1,25 +1,14 @@
 <?php
-/**
- * ZFDebug Zend Additions
- *
- * @category   ZFDebug
- * @package    ZFDebug_Controller
- * @subpackage Plugins
- * @copyright  Copyright (c) 2008-2009 ZF Debug Bar Team (http://code.google.com/p/zfdebug)
- * @license    http://code.google.com/p/zfdebug/wiki/License     New BSD License
- * @version    $Id$
- */
 
-/**
- * @category   ZFDebug
- * @package    ZFDebug_Controller
- * @subpackage Plugins
- * @copyright  Copyright (c) 2008-2009 ZF Debug Bar Team (http://code.google.com/p/zfdebug)
- * @license    http://code.google.com/p/zfdebug/wiki/License     New BSD License
- */
-class ZFDebug_Controller_Plugin_Debug_Plugin_Log
+namespace ZFDebug\Controller\Plugin\Debug\Plugin;
+
+use ZFDebug\Controller\Plugin\Debug\Plugin\InterfacePlugin;
+use ZFDebug\Controller\Plugin\Debug\Plugin;
+use ZFDebug\Controller\Plugin\Debug\Plugin\Log\Writer;
+
+class Log
     extends Zend_Controller_Plugin_Abstract
-    implements ZFDebug_Controller_Plugin_Debug_Plugin_Interface
+    implements InterfacePlugin
 {
     const ZFLOG = 10;
 
@@ -31,7 +20,7 @@ class ZFDebug_Controller_Plugin_Debug_Plugin_Log
     public function __construct()
     {
         Zend_Controller_Front::getInstance()->registerPlugin($this);
-        $this->_writer = new ZFDebug_Controller_Plugin_Debug_Plugin_Log_Writer();
+        $this->_writer = new Writer();
         $this->_logger = new Zend_Log($this->_writer);
         $this->_logger->addPriority('ZFLOG', self::ZFLOG);
     }

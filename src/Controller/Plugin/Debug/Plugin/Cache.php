@@ -1,25 +1,13 @@
 <?php
-/**
- * ZFDebug Zend Additions
- *
- * @category   ZFDebug
- * @package    ZFDebug_Controller
- * @subpackage Plugins
- * @copyright  Copyright (c) 2008-2009 ZF Debug Bar Team (http://code.google.com/p/zfdebug)
- * @license    http://code.google.com/p/zfdebug/wiki/License     New BSD License
- * @version    $Id$
- */
 
-/**
- * @category   ZFDebug
- * @package    ZFDebug_Controller
- * @subpackage Plugins
- * @copyright  Copyright (c) 2008-2009 ZF Debug Bar Team (http://code.google.com/p/zfdebug)
- * @license    http://code.google.com/p/zfdebug/wiki/License     New BSD License
- */
-class ZFDebug_Controller_Plugin_Debug_Plugin_Cache
-    extends ZFDebug_Controller_Plugin_Debug_Plugin
-    implements ZFDebug_Controller_Plugin_Debug_Plugin_Interface
+namespace ZFDebug\Controller\Plugin\Debug\Plugin;
+
+use ZFDebug\Controller\Plugin\Debug\Plugin\InterfacePlugin;
+use ZFDebug\Controller\Plugin\Debug\Plugin;
+
+class Cache
+    extends Plugin
+    implements InterfacePlugin
 {
     /**
      * Contains plugin identifier name
@@ -33,12 +21,6 @@ class ZFDebug_Controller_Plugin_Debug_Plugin_Cache
      */
     protected $_cacheBackends = array();
 
-    /**
-     * Create ZFDebug_Controller_Plugin_Debug_Plugin_Cache
-     *
-     * @param array $options
-     * @return void
-     */
     public function __construct(array $options = array())
     {
         if (!isset($options['backend'])) {
@@ -101,32 +83,16 @@ class ZFDebug_Controller_Plugin_Debug_Plugin_Cache
             $memUsed = $memSize - $memAvail;
 
             $cache = apc_cache_info();
-            if ($cache['mem_size'] > 0) {
-                $panel .= '<h4>APC '.phpversion('apc').' Enabled</h4>';
-                $panel .= round($memAvail/1024/1024, 1) . 'M available, '
-                        . round($memUsed/1024/1024, 1) . 'M used' . $linebreak
-                        . $cache['num_entries'].' Files cached ('
-                        . round($cache['mem_size']/1024/1024, 1) . 'M)' . $linebreak
-                        . $cache['num_hits'] . ' Hits ('
-                        . round($cache['num_hits'] * 100 / ($cache['num_hits'] + $cache['num_misses']), 1) . '%)'
-                        . $linebreak
-                        . $cache['expunges'] . ' Expunges (cache full count)';
-            }
-        }
-        
-        if (function_exists('opcache_get_configuration')) {
-            $opconfig = opcache_get_configuration();
-            if ($opconfig['directives']['opcache.enable']) {
-                $opstatus = opcache_get_status();
-                $cache = $opstatus['opcache_statistics'];
-                $panel .= '<h4>'.$opconfig['version']['opcache_product_name'].' '.$opconfig['version']['version'].' Enabled</h4>';
-                $panel .= round($opstatus['memory_usage']['used_memory']/1024/1024, 1) . 'M used, '
-                        . round($opstatus['memory_usage']['free_memory']/1024/1024, 1) . 'M free ('
-                        . round($opstatus['memory_usage']['current_wasted_percentage'], 1) .'% wasted)' . $linebreak
-                        . $cache['num_cached_scripts'].' Files cached' . $linebreak
-                        . $cache['hits'] . ' Hits ('
-                        . round($cache['opcache_hit_rate'], 1) . '%)';
-            }
+
+            $panel .= '<h4>APC '.phpversion('apc').' Enabled</h4>';
+            $panel .= round($memAvail/1024/1024, 1) . 'M available, '
+                    . round($memUsed/1024/1024, 1) . 'M used' . $linebreak
+                    . $cache['num_entries'].' Files cached ('
+                    . round($cache['mem_size']/1024/1024, 1) . 'M)' . $linebreak
+                    . $cache['num_hits'] . ' Hits ('
+                    . round($cache['num_hits'] * 100 / ($cache['num_hits'] + $cache['num_misses']), 1) . '%)'
+                    . $linebreak
+                    . $cache['expunges'] . ' Expunges (cache full count)';
         }
 
         foreach ($this->_cacheBackends as $name => $backend) {

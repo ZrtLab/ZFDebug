@@ -1,25 +1,13 @@
 <?php
-/**
- * ZFDebug Zend Additions
- *
- * @category   ZFDebug
- * @package    ZFDebug_Controller
- * @subpackage Plugins
- * @copyright  Copyright (c) 2008-2009 ZF Debug Bar Team (http://code.google.com/p/zfdebug)
- * @license    http://code.google.com/p/zfdebug/wiki/License     New BSD License
- * @version    $Id$
- */
 
-/**
- * @category   ZFDebug
- * @package    ZFDebug_Controller
- * @subpackage Plugins
- * @copyright  Copyright (c) 2008-2009 ZF Debug Bar Team (http://code.google.com/p/zfdebug)
- * @license    http://code.google.com/p/zfdebug/wiki/License     New BSD License
- */
-class ZFDebug_Controller_Plugin_Debug_Plugin_Exception
+namespace ZFDebug\Controller\Plugin\Debug\Plugin;
+
+use ZFDebug\Controller\Plugin\Debug\Plugin\InterfacePlugin;
+use ZFDebug\Controller\Plugin\Debug\Plugin;
+
+class Exception
     extends Zend_Controller_Plugin_Abstract
-    implements ZFDebug_Controller_Plugin_Debug_Plugin_Interface
+    implements InterfacePlugin
 {
     protected static $_logger;
 
@@ -39,15 +27,10 @@ class ZFDebug_Controller_Plugin_Debug_Plugin_Exception
 
     protected $_rendered = false;
 
-    /**
-     * Get the ZFDebug logger
-     *
-     * @return Zend_Log
-     */
     public static function getLogger()
     {
         if (!self::$_logger) {
-            if ($zfdebug = Zend_Controller_Front::getInstance()->getPlugin('ZFDebug_Controller_Plugin_Debug')) {
+            if ($zfdebug = Zend_Controller_Front::getInstance()->getPlugin('\ZFDebug\Controller\Plugin\Debug')) {
                 self::$_logger = $zfdebug->getPlugin('Log')->getLog();
             } else {
                 return false;
