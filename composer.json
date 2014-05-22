@@ -1,39 +1,40 @@
 {
-    "name": "luismayta/ZFDebug",
+    "name": "luismayta/zfdebug",
     "description": "Library",
     "keywords": [
-        "Library"
+        "Library",
+        "Debug"
     ],
-    "license": "MIT",
-	"config": {
-    	"process-timeout": 5000
+    "config": {
+        "process-timeout": 5000
     },
     "authors": [
         {
-            "name": "luismayta",
+            "name": "Luis Alberto Mayta",
             "email": "slovacus@gmail.com",
             "role": "Developer"
         }
     ],
-    "homepage": "http://github.com/luismayta/ZFDebug",
+    "homepage": "http://github.com/luismayta/zfdebug",
+    "license": "BSD-3-Clause",
     "require": {
         "php": ">=5.3.3",
-        "zendframework/zendframework1": "1.*"
+        "bombayworks/zendframework1": "1.*"
     },
     "require-dev": {
         "fzaninotto/faker": "dev-master",
-        "phpunit/phpunit": "3.7.27",
-        "phpunit/dbunit": "1.2.3",
+        "phpunit/phpunit": "4.1.0",
+        "phpunit/dbunit": "*",
         "fabpot/php-cs-fixer": "dev-master"
     },
     "autoload": {
         "psr-0":{
-            "ZFDebug":"src/"
+            "ZFDebug_":"library/"
         }
     },
     "prefer-stable": true,
     "minimum-stability": "dev",
     "config": {
-        "bin-dir": "bin/"
+        "bin-dir": "vendor/bin/"
     }
 }
