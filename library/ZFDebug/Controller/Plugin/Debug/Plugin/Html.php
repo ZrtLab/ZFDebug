@@ -1,13 +1,25 @@
 <?php
+/**
+ * ZFDebug Zend Additions
+ *
+ * @category   ZFDebug
+ * @package    ZFDebug_Controller
+ * @subpackage Plugins
+ * @copyright  Copyright (c) 2008-2009 ZF Debug Bar Team (http://code.google.com/p/zfdebug)
+ * @license    http://code.google.com/p/zfdebug/wiki/License     New BSD License
+ * @version    $Id$
+ */
 
-namespace ZFDebug\Controller\Plugin\Debug\Plugin;
-
-use ZFDebug\Controller\Plugin\Debug\Plugin\InterfacePlugin;
-use ZFDebug\Controller\Plugin\Debug\Plugin;
-
-class Html
-    extends Plugin
-    implements InterfacePlugin
+/**
+ * @category   ZFDebug
+ * @package    ZFDebug_Controller
+ * @subpackage Plugins
+ * @copyright  Copyright (c) 2008-2009 ZF Debug Bar Team (http://code.google.com/p/zfdebug)
+ * @license    http://code.google.com/p/zfdebug/wiki/License     New BSD License
+ */
+class ZFDebug_Controller_Plugin_Debug_Plugin_Html 
+    extends ZFDebug_Controller_Plugin_Debug_Plugin 
+    implements ZFDebug_Controller_Plugin_Debug_Plugin_Interface
 {
     /**
      * Contains plugin identifier name
@@ -16,7 +28,13 @@ class Html
      */
     protected $_identifier = 'html';
 
-
+    /**
+     * Create ZFDebug_Controller_Plugin_Debug_Plugin_Html
+     *
+     * @param string $tab
+     * @paran string $panel
+     * @return void
+     */
     public function __construct()
     {
 
@@ -31,7 +49,7 @@ class Html
     {
         return $this->_identifier;
     }
-
+    
     /**
      * Returns the base64 encoded icon
      *
@@ -39,7 +57,7 @@ class Html
      **/
     public function getIconData()
     {
-        return 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAEdSURBVDjLjZIxTgNBDEXfbDZIlIgmCKWgSpMGxEk4AHehgavQcJY0KRKJJiBQLkCR7PxvmiTsbrJoLY1sy/Ibe+an9XodtqkfSUd+Op0mTlgpidFodKpGRAAwn8/pstI2AHvfbi6KAkndgHZx31iP2/CTE3Q1A0ji6fUjsiFn8fJ4k44mSCmR0sl3QhJXF2fYwftXPl5hsVg0Xr0d2yZnIwWbqrlyOZlMDtc+v33H9eUQO7ACOZAC2Ye8qqIJqCfZRtnIIBnVQH8AdQOqylTZWPBwX+zGj93ZrXU7ZLlcxj5vArYi5/Iweh+BNQCbrVl8/uAMvjvvJbBU/++6rVarGI/HB0BbI4PBgNlsRtGlsL4CK7sAfQX2L6CPwH4BZf1E9tbX5ioAAAAASUVORK5CYII=';
+        return 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAEdSURBVDjLjZIxTgNBDEXfbDZIlIgmCKWgSpMGxEk4AHehgavQcJY0KRKJJiBQLkCR7PxvmiTsbrJoLY1sy/Ibe+an9XodtqkfSUd+Op0mTlgpidFodKpGRAAwn8/pstI2AHvfbi6KAkndgHZx31iP2/CTE3Q1A0ji6fUjsiFn8fJ4k44mSCmR0sl3QhJXF2fYwftXPl5hsVg0Xr0d2yZnIwWbqrlyOZlMDtc+v33H9eUQO7ACOZAC2Ye8qqIJqCfZFDebugnIIBnVQH8AdQOqylTZWPBwX+zGj93ZrXU7ZLlcxj5vArYi5/Iweh+BNQCbrVl8/uAMvjvvJbBU/++6rVarGI/HB0BbI4PBgNlsRtGlsL4CK7sAfQX2L6CPwH4BZf1E9tbX5ioAAAAASUVORK5CYII=';
     }
 
     /**

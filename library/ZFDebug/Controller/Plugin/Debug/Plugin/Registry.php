@@ -1,11 +1,23 @@
 <?php
+/**
+ * ZFDebug Zend Additions
+ *
+ * @category   ZFDebug
+ * @package    ZFDebug_Controller
+ * @subpackage Plugins
+ * @copyright  Copyright (c) 2008-2009 ZF Debug Bar Team (http://code.google.com/p/zfdebug)
+ * @license    http://code.google.com/p/zfdebug/wiki/License     New BSD License
+ * @version    $Id: $
+ */
 
-namespace ZFDebug\Controller\Plugin\Debug\Plugin;
-
-use ZFDebug\Controller\Plugin\Debug\Plugin\InterfacePlugin;
-use ZFDebug\Controller\Plugin\Debug\Plugin;
-
-class Registry extends Plugin implements InterfacePlugin
+/**
+ * @category   ZFDebug
+ * @package    ZFDebug_Controller
+ * @subpackage Plugins
+ * @copyright  Copyright (c) 2008-2009 ZF Debug Bar Team (http://code.google.com/p/zfdebug)
+ * @license    http://code.google.com/p/zfdebug/wiki/License     New BSD License
+ */
+class ZFDebug_Controller_Plugin_Debug_Plugin_Registry extends ZFDebug_Controller_Plugin_Debug_Plugin implements ZFDebug_Controller_Plugin_Debug_Plugin_Interface
 {
     /**
      * Contains plugin identifier name
@@ -21,6 +33,11 @@ class Registry extends Plugin implements InterfacePlugin
      */
     protected $_registry;
 
+    /**
+     * Create ZFDebug_Controller_Plugin_Debug_Plugin_Registry
+     *
+     * @return void
+     */
     public function __construct()
     {
         // $this->_registry = Zend_Registry::getInstance();
@@ -35,7 +52,7 @@ class Registry extends Plugin implements InterfacePlugin
     {
         return $this->_identifier;
     }
-
+    
     /**
      * Returns the base64 encoded icon
      *

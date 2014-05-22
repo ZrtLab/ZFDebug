@@ -1,13 +1,26 @@
 <?php
 
-namespace ZFDebug\Controller\Plugin\Debug\Plugin;
+/**
+ * ZFDebug Zend Additions
+ *
+ * @category   ZFDebug
+ * @package    ZFDebug_Controller
+ * @subpackage Plugins
+ * @copyright  Copyright (c) 2008-2009 ZF Debug Bar Team (http://code.google.com/p/zfdebug)
+ * @license    http://code.google.com/p/zfdebug/wiki/License     New BSD License
+ * @version    $Id$
+ */
 
-use ZFDebug\Controller\Plugin\Debug\Plugin\InterfacePlugin;
-use ZFDebug\Controller\Plugin\Debug\Plugin;
 
-
-class Database extends Plugin
-    implements InterfacePlugin
+/**
+ * @category   ZFDebug
+ * @package    ZFDebug_Controller
+ * @subpackage Plugins
+ * @copyright  Copyright (c) 2008-2009 ZF Debug Bar Team (http://code.google.com/p/zfdebug)
+ * @license    http://code.google.com/p/zfdebug/wiki/License     New BSD License
+ */
+class ZFDebug_Controller_Plugin_Debug_Plugin_Database extends ZFDebug_Controller_Plugin_Debug_Plugin
+    implements ZFDebug_Controller_Plugin_Debug_Plugin_Interface
 {
 
     /**
@@ -23,6 +36,12 @@ class Database extends Plugin
     protected $_db = array();
     protected $_explain = false;
 
+    /**
+     * Create ZFDebug_Controller_Plugin_Debug_Plugin_Variables
+     *
+     * @param Zend_Db_Adapter_Abstract|array $adapters
+     * @return void
+     */
     public function __construct(array $options = array())
     {
         if (!isset($options['adapter']) || !count($options['adapter'])) {

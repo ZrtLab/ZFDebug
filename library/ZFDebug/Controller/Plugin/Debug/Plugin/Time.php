@@ -1,16 +1,35 @@
 <?php
+/**
+ * ZFDebug Zend Additions
+ *
+ * @category   ZFDebug
+ * @package    ZFDebug_Controller
+ * @subpackage Plugins
+ * @copyright  Copyright (c) 2008-2009 ZF Debug Bar Team (http://code.google.com/p/zfdebug)
+ * @license    http://code.google.com/p/zfdebug/wiki/License     New BSD License
+ * @version    $Id$
+ */
 
-//require_once 'Zend/Session.php';
+/**
+ * @see Zend_Session
+ */
+require_once 'Zend/Session.php';
 
-//require_once 'Zend/Session/Namespace.php';
-namespace ZFDebug\Controller\Plugin\Debug\Plugin;
+/**
+ * @see Zend_Session_Namespace
+ */
+require_once 'Zend/Session/Namespace.php';
 
-use ZFDebug\Controller\Plugin\Debug\Plugin\InterfacePlugin;
-use ZFDebug\Controller\Plugin\Debug\Plugin;
-
-class Time
-    extends Zend_Controller_Plugin_Abstract
-    implements InterfacePlugin
+/**
+ * @category   ZFDebug
+ * @package    ZFDebug_Controller
+ * @subpackage Plugins
+ * @copyright  Copyright (c) 2008-2009 ZF Debug Bar Team (http://code.google.com/p/zfdebug)
+ * @license    http://code.google.com/p/zfdebug/wiki/License     New BSD License
+ */
+class ZFDebug_Controller_Plugin_Debug_Plugin_Time 
+    extends Zend_Controller_Plugin_Abstract 
+    implements ZFDebug_Controller_Plugin_Debug_Plugin_Interface
 {
     /**
      * Contains plugin identifier name
@@ -18,7 +37,7 @@ class Time
      * @var string
      */
     protected $_identifier = 'time';
-
+    
     protected $_logger;
 
     /**
@@ -39,13 +58,17 @@ class Time
     {
         Zend_Controller_Front::getInstance()->registerPlugin($this);
     }
-
-
+    
+    /**
+     * Get the ZFDebug logger
+     *
+     * @return Zend_Log
+     */
     public function getLogger()
     {
         if (!$this->_logger) {
             $this->_logger = Zend_Controller_Front::getInstance()
-                ->getPlugin('\ZFDebug\Controller\Plugin\Debug')->getPlugin('Log')->getLog();
+                ->getPlugin('ZFDebug_Controller_Plugin_Debug')->getPlugin('Log')->getLog();
             $this->_logger->addPriority('Time', 9);
         }
         return $this->_logger;
@@ -60,7 +83,7 @@ class Time
     {
         return $this->_identifier;
     }
-
+    
     /**
      * Returns the base64 encoded icon
      *
@@ -90,15 +113,21 @@ class Time
     {
         return '';
     }
-
+    
     public function format($value)
     {
         return round($value, 2).'ms';
     }
 
+    /**
+     * Sets a time mark identified with $name
+     *
+     * @param string $name
+     * @deprecated Use ZFDebug_Controller_Plugin_Debug_Plugin_Log
+     */
     public function mark($name) {
         $this->getLogger()->mark("$name");
-        trigger_error("Zrt Time plugin is deprecated, use the Log plugin");
+        trigger_error("ZFDebug Time plugin is deprecated, use the Log plugin");
     }
 
     public function getDispatchStatistics()
@@ -164,7 +193,7 @@ class Time
     {
         $this->_timer['dispatchLoopShutdown'] = (microtime(true)-$_SERVER['REQUEST_TIME'])*1000;
     }
-
+    
     /**
      * Calculate average time from $array
      *
@@ -186,7 +215,7 @@ class Time
         $cuantos = count($array);
         return round(array_sum($array) / $cuantos, $precision);
     }
-
+    
     public function getLinebreak()
     {
         return '<br'.$this->getClosingBracket();
@@ -203,8 +232,8 @@ class Time
         }
 
         return $this->_closingBracket;
-    }
-
+    }  
+    
     protected function _isXhtml()
     {
         $view = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->view;

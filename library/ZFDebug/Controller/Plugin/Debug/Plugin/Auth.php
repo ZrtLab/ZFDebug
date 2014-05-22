@@ -1,10 +1,23 @@
 <?php
+/**
+ * ZFDebug Zend Additions
+ *
+ * @category   ZFDebug
+ * @package    ZFDebug_Controller
+ * @subpackage Plugins
+ * @copyright  Copyright (c) 2008-2009 ZF Debug Bar Team (http://code.google.com/p/zfdebug)
+ * @license    http://code.google.com/p/zfdebug/wiki/License     New BSD License
+ * @version    $Id: $
+ */
 
-namespace ZFDebug\Controller\Plugin\Debug\Plugin;
-
-use ZFDebug\Controller\Plugin\Debug\Plugin\InterfacePlugin;
-
-class Auth implements InterfacePlugin
+/**
+ * @category   ZFDebug
+ * @package    ZFDebug_Controller
+ * @subpackage Plugins
+ * @copyright  Copyright (c) 2008-2009 ZF Debug Bar Team (http://code.google.com/p/zfdebug)
+ * @license    http://code.google.com/p/zfdebug/wiki/License     New BSD License
+ */
+class ZFDebug_Controller_Plugin_Debug_Plugin_Auth implements ZFDebug_Controller_Plugin_Debug_Plugin_Interface
 {
     /**
      * Contains plugin identifier name
@@ -42,7 +55,7 @@ class Auth implements InterfacePlugin
     protected $_acl;
 
     /**
-     * Create Zrt_Controller_Plugin_Debug_Plugin_Auth
+     * Create ZFDebug_Controller_Plugin_Debug_Plugin_Auth
      *
      * @var string $user
      * @var string $role
@@ -68,7 +81,7 @@ class Auth implements InterfacePlugin
     {
         return $this->_identifier;
     }
-
+    
     /**
      * Returns the base64 encoded icon
      *

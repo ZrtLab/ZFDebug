@@ -1,12 +1,25 @@
 <?php
 
-namespace ZFDebug\Controller\Plugin;
+/**
+ * ZFDebug Zend Additions
+ *
+ * @category   ZFDebug
+ * @package    ZFDebug_Controller
+ * @subpackage Plugins
+ * @copyright  Copyright (c) 2008-2009 ZF Debug Bar Team (http://code.google.com/p/zfdebug)
+ * @license    http://code.google.com/p/zfdebug/wiki/License     New BSD License
+ * @version    $Id$
+ */
 
-use ZFDebug\Controller\Plugin\Debug\Plugin\Text;
-use ZFDebug\Controller\Plugin\Debug\Plugin\Log;
-use ZFDebug\Controller\Plugin\Debug\Plugin\Interface;
 
-class Debug extends Zend_Controller_Plugin_Abstract
+/**
+ * @category   ZFDebug
+ * @package    ZFDebug_Controller
+ * @subpackage Plugins
+ * @copyright  Copyright (c) 2008-2009 ZF Debug Bar Team (http://code.google.com/p/zfdebug)
+ * @license    http://code.google.com/p/zfdebug/wiki/License     New BSD License
+ */
+class ZFDebug_Controller_Plugin_Debug extends Zend_Controller_Plugin_Abstract
 {
 
     /**
@@ -82,7 +95,7 @@ class Debug extends Zend_Controller_Plugin_Abstract
         /**
          * Creating ZF Version Tab always shown
          */
-        $version = new Text();
+        $version = new ZFDebug_Controller_Plugin_Debug_Plugin_Text();
         $version->setPanel($this->_getVersionPanel())
             ->setTab($this->_getVersionTab())
             ->setIdentifier('copyright')
@@ -93,7 +106,7 @@ class Debug extends Zend_Controller_Plugin_Abstract
         /**
          * Creating the log tab
          */
-        $logger = new Log();
+        $logger = new ZFDebug_Controller_Plugin_Debug_Plugin_Log();
         $this->registerPlugin($logger);
         $logger->mark('Startup - ZFDebug construct()', true);
 
@@ -131,8 +144,13 @@ class Debug extends Zend_Controller_Plugin_Abstract
         return $this;
     }
 
-
-    public function registerPlugin(Interface $plugin)
+    /**
+     * Register a new plugin in the Debug Bar
+     *
+     * @param ZFDebug_Controller_Plugin_Debug_Plugin_Interface
+     * @return ZFDebug_Controller_Plugin_Debug
+     */
+    public function registerPlugin(ZFDebug_Controller_Plugin_Debug_Plugin_Interface $plugin)
     {
         $this->_plugins[$plugin->getIdentifier()] = $plugin;
         return $this;
@@ -142,7 +160,7 @@ class Debug extends Zend_Controller_Plugin_Abstract
      * Unregister a plugin in the Debug Bar
      *
      * @param string $plugin
-     * @return Zrt_Controller_Plugin_Debug
+     * @return ZFDebug_Controller_Plugin_Debug
      */
     public function unregisterPlugin($plugin)
     {
@@ -165,7 +183,7 @@ class Debug extends Zend_Controller_Plugin_Abstract
      * Get a registered plugin in the Debug Bar
      *
      * @param string $identifier
-     * @return Zrt_Controller_Plugin_Debug_Plugin_Interface
+     * @return ZFDebug_Controller_Plugin_Debug_Plugin_Interface
      */
     public function getPlugin($identifier)
     {
@@ -270,7 +288,7 @@ class Debug extends Zend_Controller_Plugin_Abstract
             }
 
             // Register an instance
-            if (is_object($plugin) && in_array('\ZFDebug\Controller\Plugin\Debug\Plugin\Interface',
+            if (is_object($plugin) && in_array('ZFDebug_Controller_Plugin_Debug_Plugin_Interface',
                     class_implements($plugin))) {
                 $this->registerPlugin($plugin);
                 continue;
@@ -283,9 +301,9 @@ class Debug extends Zend_Controller_Plugin_Abstract
 
             // Register a classname
             if (in_array($plugin,
-                    \ZFDebug\Controller\Plugin\Debug::$standardPlugins)) {
+                    ZFDebug_Controller_Plugin_Debug::$standardPlugins)) {
                 // standard plugin
-                $pluginClass = '\Zrt\Controller\Plugin\Debug\Plugin' . '\\' . $plugin;
+                $pluginClass = 'ZFDebug_Controller_Plugin_Debug_Plugin_' . $plugin;
             } else {
                 // we use a custom plugin
                 if (!preg_match('~^[\w]+$~D', $plugin)) {
@@ -308,6 +326,7 @@ class Debug extends Zend_Controller_Plugin_Abstract
     protected function _getVersionTab()
     {
         return '<strong>ZFDebug</strong>';
+        // return ' ' . Zend_Version::VERSION . '/'.phpversion();
     }
 
     /**
